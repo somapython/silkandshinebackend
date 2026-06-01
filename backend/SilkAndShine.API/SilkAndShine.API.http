@@ -1,0 +1,6 @@
+@SilkAndShine.API_HostAddress = http://localhost:5079
+
+GET {{SilkAndShine.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
