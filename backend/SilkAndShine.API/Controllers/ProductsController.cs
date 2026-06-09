@@ -18,7 +18,15 @@ public class ProductsController : ControllerBase
     }
 
     // GET api/Products
+
     [HttpGet]
+    public IActionResult GetProducts()
+    {
+        return Ok(
+            _context.Products.ToList()
+        );
+    }
+
     [HttpGet("{id}")]
     public IActionResult GetProduct(
         int id
@@ -53,42 +61,44 @@ public class ProductsController : ControllerBase
 
 [HttpPut("{id}")]
 public IActionResult UpdateProduct(
-    int id,
-    Product product
+int id,
+Product updated
 )
 {
-    var existing =
-        _context.Products
-        .FirstOrDefault(
-            x => x.Id == id
-        );
+    var product =
+    _context.Products
+    .FirstOrDefault(
+        x => x.Id == id
+    );
 
-    if(existing == null)
+    if(product == null)
     {
         return NotFound();
     }
 
-    existing.Name =
-        product.Name;
+    product.Name =
+    updated.Name;
 
-    existing.Description =
-        product.Description;
+    product.Description =
+    updated.Description;
 
-    existing.Price =
-        product.Price;
+    product.Price =
+    updated.Price;
 
-    existing.ImageUrl =
-        product.ImageUrl;
+    product.Stock =
+    updated.Stock;
 
-    existing.Category =
-        product.Category;
+    product.ImageUrl =
+    updated.ImageUrl;
 
-    existing.Stock =
-        product.Stock;
+    product.Category =
+    updated.Category;
 
     _context.SaveChanges();
 
-    return Ok();
+    return Ok(
+        "Product Updated"
+    );
 }
 
 [HttpDelete("{id}")]

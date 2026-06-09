@@ -18,6 +18,18 @@ public class AppDbContext : DbContext
     public DbSet<Wishlist> Wishlists{ get; set; }
 
     public DbSet<Cart> Carts { get; set; }
+    
+    protected override void OnModelCreating(
+    ModelBuilder modelBuilder
+    )
+    {
+        base.OnModelCreating(
+            modelBuilder
+        );
+
+        modelBuilder.Entity<Cart>()
+            .ToTable("Carts");
+    }
 
     public DbSet<Address> Addresses { get; set; }
 
